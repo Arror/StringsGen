@@ -65,3 +65,13 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
+Package.resolved
+StringsGen.xcodeproj/Dwifft_Info.plist
+StringsGen.xcodeproj/LLRegex_Info.plist
+StringsGen.xcodeproj/PathKit_Info.plist
+StringsGen.xcodeproj/project.pbxproj
+StringsGen.xcodeproj/SwiftyJSON_Info.plist
+StringsGen.xcodeproj/SWXMLHash_Info.plist
+StringsGen.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+StringsGen.xcodeproj/xcshareddata/xcschemes/StringsGen-Package.xcscheme
+StringsGen.xcodeproj/xcshareddata/xcschemes/xcschememanagement.plist
