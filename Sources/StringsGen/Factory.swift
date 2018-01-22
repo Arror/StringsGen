@@ -13,6 +13,7 @@ public enum Factory {
     private static let mapping: [StringsItemType: StringsItem.Type] = [
         .label:             Label.self,
         .textField:         TextField.self,
+        .textView:          TextView.self,
         .segmentedControl:  SegmentedControl.self,
         .button:            Button.self,
         .tabBarItem:        TabBarItem.self,

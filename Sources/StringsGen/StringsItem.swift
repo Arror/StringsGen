@@ -20,6 +20,7 @@ public struct Strings {
 public enum StringsItemType: String {
     case label
     case textField
+    case textView
     case segmentedControl
     case button
     case tabBarItem
@@ -75,6 +76,30 @@ public struct TextField: StringsItem {
                 annotation: "/* Class = \"UITextField\"; placeholder = \"\(self.placeholder)\"; ObjectID = \"\(self.objectID)\"; */",
                 rawStrings: "\"\(self.objectID).placeholder\" = \"\(self.placeholder)\";",
                 rawStringsPlaceholder: "\"\(self.objectID).placeholder\" = \"<#需要更新#>\";"
+            )
+        ]
+    }
+}
+
+public struct TextView: StringsItem {
+    
+    private let objectID: String
+    private let text: String
+    
+    public init(indexer: XMLIndexer) {
+        self.objectID = indexer.element?.attribute(by: "id")?.text ?? ""
+        self.text = indexer["string"].element?.text ?? ""
+    }
+    
+    public var stringss: [Strings] {
+        return [
+            Strings(
+                key: "\(self.objectID).text",
+                value: self.text,
+                isValid: !self.text.isEmpty,
+                annotation: "/* Class = \"UITextView\"; text = \"\(self.text)\"; ObjectID = \"\(self.objectID)\"; */",
+                rawStrings: "\"\(self.objectID).text\" = \"\(self.text)\";",
+                rawStringsPlaceholder: "\"\(self.objectID).text\" = \"<#需要更新#>\";"
             )
         ]
     }
