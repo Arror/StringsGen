@@ -26,6 +26,7 @@ public enum StringsItemType: String {
     case tabBarItem
     case navigationItem
     case barButtonItem
+    case searchBar
 }
 
 public protocol StringsItem {
@@ -233,10 +234,12 @@ public struct NavigationItem: StringsItem {
     
     private let objectID: String
     private let title: String
+    private let prompt: String
     
     public init(indexer: XMLIndexer) {
         self.objectID = indexer.element?.attribute(by: "id")?.text ?? ""
         self.title = indexer.element?.attribute(by: "title")?.text ?? ""
+        self.prompt = indexer.element?.attribute(by: "prompt")?.text ?? ""
     }
     
     public var stringss: [Strings] {
@@ -248,6 +251,14 @@ public struct NavigationItem: StringsItem {
                 annotation: "/* Class = \"UINavigationItem\"; title = \"\(self.title)\"; ObjectID = \"\(self.objectID)\"; */",
                 rawStrings: "\"\(self.objectID).title\" = \"\(self.title)\";",
                 rawStringsPlaceholder: "\"\(self.objectID).title\" = \"<#需要更新#>\";"
+            ),
+            Strings(
+                key: "\(self.objectID).prompt",
+                value: self.prompt,
+                isValid: !self.prompt.isEmpty,
+                annotation: "/* Class = \"UINavigationItem\"; prompt = \"\(self.prompt)\"; ObjectID = \"\(self.objectID)\"; */",
+                rawStrings: "\"\(self.objectID).prompt\" = \"\(self.prompt)\";",
+                rawStringsPlaceholder: "\"\(self.objectID).prompt\" = \"<#需要更新#>\";"
             )
         ]
     }
@@ -272,6 +283,50 @@ public struct BarButtonItem: StringsItem {
                 annotation: "/* Class = \"UIBarButtonItem\"; title = \"\(self.title)\"; ObjectID = \"\(self.objectID)\"; */",
                 rawStrings: "\"\(self.objectID).title\" = \"\(self.title)\";",
                 rawStringsPlaceholder: "\"\(self.objectID).title\" = \"<#需要更新#>\";"
+            )
+        ]
+    }
+}
+
+public struct SearchBar: StringsItem {
+    
+    private let objectID: String
+    private let text: String
+    private let prompt: String
+    private let placeholder: String
+    
+    public init(indexer: XMLIndexer) {
+        self.objectID = indexer.element?.attribute(by: "id")?.text ?? ""
+        self.text = indexer.element?.attribute(by: "text")?.text ?? ""
+        self.prompt = indexer.element?.attribute(by: "prompt")?.text ?? ""
+        self.placeholder = indexer.element?.attribute(by: "placeholder")?.text ?? ""
+    }
+    
+    public var stringss: [Strings] {
+        return [
+            Strings(
+                key: "\(self.objectID).text",
+                value: self.text,
+                isValid: !self.text.isEmpty,
+                annotation: "/* Class = \"UISearchBar\"; text = \"\(self.text)\"; ObjectID = \"\(self.objectID)\"; */",
+                rawStrings: "\"\(self.objectID).text\" = \"\(self.text)\";",
+                rawStringsPlaceholder: "\"\(self.objectID).text\" = \"<#需要更新#>\";"
+            ),
+            Strings(
+                key: "\(self.objectID).prompt",
+                value: self.prompt,
+                isValid: !self.prompt.isEmpty,
+                annotation: "/* Class = \"UISearchBar\"; prompt = \"\(self.text)\"; ObjectID = \"\(self.objectID)\"; */",
+                rawStrings: "\"\(self.objectID).prompt\" = \"\(self.prompt)\";",
+                rawStringsPlaceholder: "\"\(self.objectID).prompt\" = \"<#需要更新#>\";"
+            ),
+            Strings(
+                key: "\(self.objectID).placeholder",
+                value: self.placeholder,
+                isValid: !self.placeholder.isEmpty,
+                annotation: "/* Class = \"UISearchBar\"; placeholder = \"\(self.placeholder)\"; ObjectID = \"\(self.objectID)\"; */",
+                rawStrings: "\"\(self.objectID).placeholder\" = \"\(self.placeholder)\";",
+                rawStringsPlaceholder: "\"\(self.objectID).placeholder\" = \"<#需要更新#>\";"
             )
         ]
     }

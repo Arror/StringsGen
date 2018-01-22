@@ -18,7 +18,8 @@ public enum Factory {
         .button:            Button.self,
         .tabBarItem:        TabBarItem.self,
         .navigationItem:    NavigationItem.self,
-        .barButtonItem:     BarButtonItem.self
+        .barButtonItem:     BarButtonItem.self,
+        .searchBar:         SearchBar.self
     ]
     
     public static func makeStringsItem(indexer: XMLIndexer) -> StringsItem? {
