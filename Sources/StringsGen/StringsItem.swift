@@ -61,15 +61,25 @@ public struct Label: StringsItem {
 public struct TextField: StringsItem {
     
     private let objectID: String
+    private let text: String
     private let placeholder: String
     
     public init(indexer: XMLIndexer) {
         self.objectID = indexer.element?.attribute(by: "id")?.text ?? ""
+        self.text = indexer.element?.attribute(by: "text")?.text ?? ""
         self.placeholder = indexer.element?.attribute(by: "placeholder")?.text ?? ""
     }
     
     public var stringss: [Strings] {
         return [
+            Strings(
+                key: "\(self.objectID).text",
+                value: self.text,
+                isValid: !self.text.isEmpty,
+                annotation: "/* Class = \"UITextField\"; text = \"\(self.text)\"; ObjectID = \"\(self.objectID)\"; */",
+                rawStrings: "\"\(self.objectID).text\" = \"\(self.text)\";",
+                rawStringsPlaceholder: "\"\(self.objectID).text\" = \"<#需要更新#>\";"
+            ),
             Strings(
                 key: "\(self.objectID).placeholder",
                 value: self.placeholder,
